@@ -1,3 +1,22 @@
-<p>
-  login works!
-</p>
+<div class="container">
+	<form class="login-form" (ngSubmit) = "login()" >
+		<div class="login-form__title">Login</div>
+		<label for="">Name</label>
+		<input
+			id="name"
+			type="text"
+			class="login-form__input"
+			placeholder="Please Enter your Name"
+			required
+		/>
+		<label for="email">Email</label>
+		<input
+			id="email"
+			type="email"
+			class="login-form__input"
+			placeholder="Please Enter your Email"
+			required
+		/>
+		<button class="login-form__button">Login</button>
+	</form>
+</div>
