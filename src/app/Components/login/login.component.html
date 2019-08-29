@@ -1,22 +1,26 @@
 <div class="container">
-	<form class="login-form" (ngSubmit) = "login()" >
+	<form class="login-form">
 		<div class="login-form__title">Login</div>
 		<label for="">Name</label>
 		<input
 			id="name"
+			name="userName"
 			type="text"
 			class="login-form__input"
 			placeholder="Please Enter your Name"
+			[(ngModel)]="userName"
 			required
 		/>
 		<label for="email">Email</label>
 		<input
 			id="email"
+			name="userEmail"
 			type="email"
 			class="login-form__input"
 			placeholder="Please Enter your Email"
+			[(ngModel)]="userEmail"
 			required
 		/>
-		<button class="login-form__button">Login</button>
+		<button type="submit" (click) = "login()" class="login-form__button">Login</button>
 	</form>
 </div>

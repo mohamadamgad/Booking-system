@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
+import { LocalStorageService } from 'angular-web-storage';
+
+
 
 @Component({
   selector: 'app-login',
@@ -7,9 +11,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+	public userName: String;
+	public userEmail: String;
+	
+
+  	constructor(
+		private _router: Router,
+		private _storageService: LocalStorageService
+		) { }
 
   ngOnInit() {
+  }
+
+  public login() {
+	
+	this._router.navigate(['/booking']);
+	this._storageService.set('userName', this.userName);
+
   }
 
 }
