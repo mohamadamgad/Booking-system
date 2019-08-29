@@ -11,23 +11,23 @@ import { LocalStorageService } from 'angular-web-storage';
 })
 export class LoginComponent implements OnInit {
 
-	public userName: String;
-	public userEmail: String;
-	
+    public userName: String;
+    public userEmail: String;
 
-  	constructor(
-		private _router: Router,
-		private _storageService: LocalStorageService
-		) { }
 
-  ngOnInit() {
-  }
+    constructor(
+        private _router: Router,
+        private _storageService: LocalStorageService
+        ) { }
 
-  public login() {
-	
-	this._router.navigate(['/booking']);
-	this._storageService.set('userName', this.userName);
+    ngOnInit() {
+    }
 
-  }
+    public login() {
+
+        this._router.navigate(['/booking']);
+        this._storageService.set('userName', this.userName);
+
+    }
 
 }
