@@ -1,0 +1,31 @@
+.search{
+    display: flex;
+    justify-content: center;
+}
+
+.search__wrapper{
+    display: flex;
+    width: 50%;
+}
+.search__input {
+    min-height: 40px;
+    padding: 0;
+    border: 0px;
+    flex: 2 0;
+    border: 1px solid #D6D8DC;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #323C52;
+    text-indent:12px;
+}
+
+.search__submit {
+    -webkit-appearance: none;
+    border: 0;
+    height: 40px;
+    border-radius: 4px;
+    background: #5AA8AC;
+    color: #FFFFFF;
+    font-size: 16px;
+    margin-left: 20px;
+}
