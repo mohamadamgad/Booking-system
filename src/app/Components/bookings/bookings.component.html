@@ -11,17 +11,6 @@
             [(ngModel)]="userCoordinates"
             required
         />
-        <!-- <input
-            type="text"
-            ngxDaterangepickerMd
-            [locale]="{ applyLabel: 'ok', format: 'DD-MM-YYYY' }"
-            startKey="start"
-            placeholder="From-To"
-            endKey="end"
-            [(ngModel)]="selected"
-            name="daterange"
-            (change) = "datesSelected($event)"
-        /> -->
         <ejs-daterangepicker strictMode='true' placeholder='Select a range' 
         (renderDayCell)="onLoad($event)"
         (change) = "datesSelected($event)"></ejs-daterangepicker>

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalStorageService } from 'angular-web-storage';
 import { LocationService } from '../../Services/location.service';
-import { Moment } from 'moment';
+import { BookingsService } from './bookings.service';
+
 
 @Component({
     selector: 'app-bookings',
@@ -11,10 +12,12 @@ import { Moment } from 'moment';
 export class BookingsComponent implements OnInit {
     public userName: String = '';
     public userCoordinates: String = '';
+    public properties = [];
 
     constructor(
         private _storageService: LocalStorageService,
-        private _locationService: LocationService
+        private _locationService: LocationService,
+        private _bookingsService: BookingsService
     ) {}
 
     ngOnInit() {
@@ -29,6 +32,14 @@ export class BookingsComponent implements OnInit {
 
     public datesSelected(event) {
         console.log('selected', event);
+    }
+
+    public search() {
+        this._bookingsService.getProperties(this.userCoordinates,
+         {Accept: 'application/json' }).subscribe((res: any) => {
+            this.properties = res.results.items;
+            console.log('props', this.properties);
+        });
     }
 
     public onLoad(args: any) {

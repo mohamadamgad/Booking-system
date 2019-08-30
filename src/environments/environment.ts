@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+    production: false,
+    backendUrl: 'https://places.demo.api.here.com/places/v1/discover/explore?cat=accommodation&at=',
+    apiToken: '&app_id=qXL5nEshPUkdJ7b4teCP&app_code=SKc8GLzblkfcWAJyGYx9ug'
 };
 
 /*

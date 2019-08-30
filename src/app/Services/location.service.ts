@@ -16,6 +16,7 @@ export class LocationService {
                     });
                 },
                 err => {
+                    console.log('error', err);
                     reject(err);
                 }
             );
