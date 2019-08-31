@@ -20,14 +20,16 @@
 
 <div class="properties">
     <h3 *ngIf="properties.length > 0">We have found {{properties.length}} properties near you</h3>
-    <ul class="properties__list" *ngFor="let property of properties">
+    <ul class="properties__list" *ngFor="let property of properties; let i = index">
         <li class="properties__list-item properties__list-item-icon"><img src="{{property.icon}}" alt=""></li>
         <div class="properties__list-details">
             <li class="properties__list-item">{{property.title}}</li>
             <li class="properties__list-item">{{property.category.id}}</li>
             <li class="properties__list-item">{{property.distance}} m</li>
             <li class="properties__list-item properties__list-item-action">
-                <button type="submit" class="properties__list-item-action-button" >Book Now</button>
+                <button type="submit" class="properties__list-item-action-button" (click) = "bookProperty(i)">
+                    Book Now
+                </button>
             </li>
         </div>
     </ul>

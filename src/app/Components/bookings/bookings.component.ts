@@ -13,6 +13,7 @@ export class BookingsComponent implements OnInit {
     public userName: String = '';
     public userCoordinates: String = '';
     public properties = [];
+    public selectedDates = {};
 
     constructor(
         private _storageService: LocalStorageService,
@@ -32,6 +33,8 @@ export class BookingsComponent implements OnInit {
 
     public datesSelected(event) {
         console.log('selected', event);
+        console.log('selected type', typeof event);
+        this.selectedDates = event;
     }
 
     public search() {
@@ -40,6 +43,11 @@ export class BookingsComponent implements OnInit {
             this.properties = res.results.items;
             console.log('props', this.properties);
         });
+    }
+
+    public bookProperty(i) {
+        console.log('title', this.properties[i].title);
+        console.log('selected dates', this.selectedDates);
     }
 
     public onLoad(args: any) {
