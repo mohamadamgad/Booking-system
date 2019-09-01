@@ -47,7 +47,7 @@ export class RequestService {
         console.log('header', headers);
         console.log('data', data);
         return this._http
-            .post(this._rootUrl + url + this._apiToken, data, { headers, responseType })
+            .post(url, data, { headers, responseType })
             .pipe(
                 map(item => {
                     JSON.stringify(item);

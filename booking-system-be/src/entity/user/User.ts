@@ -10,10 +10,6 @@ export class User {
 
     @Column()
     name: string;
-
-    @Column()
-    age: number;
-
     @Column()
     email: string
 
@@ -23,7 +19,6 @@ export class User {
     static createUserFromJson(userJson) {
         const user = new User();
         user.name = userJson.name;
-        user.age = userJson.age;
         user.email = userJson.email;
         return user;
     }

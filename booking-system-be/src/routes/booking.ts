@@ -9,9 +9,21 @@ const router = module.exports = require('express')()
 
 router.use(bodyParser.json());
 
-router.get('/', async (request, response) => {
-    const bookings = await getManager().find(Booking);
+router.get('/booking/:id', async (request, response) => {
+    console.log('req params', request);
+    const bookings = await getManager().getRepository(Booking).findOne({user : request.params.id});;
     response.send(bookings);
+});
+
+router.get('/booking/getTitle/:title', async (request, response) => {
+    console.log('req params', request.params);
+    const bookings = await getManager().getRepository(Booking).find({title : request.params.title});;
+    response.send(bookings);
+});
+
+router.get('/', async (request, response) => {
+    const booking = await getManager().find(Booking);
+    response.send(booking);
 });
 
 
