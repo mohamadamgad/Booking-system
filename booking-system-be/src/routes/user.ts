@@ -1,16 +1,21 @@
 import "reflect-metadata";
-import { createConnection } from "typeorm";
-import * as express from "express";
 import { User } from "../entity/user/User";
+import * as bodyParser from 'body-parser';
+import {getManager} from "typeorm";
+
 
 const router = module.exports = require('express')()
 
+router.use(bodyParser.json());
 
 router.get('/', async (request, response) => {
-    createConnection()
-        .then(async connection => {
-            const users = await connection.manager.find(User);
-            response.send(users);
-        })
-        .catch(error => console.log(error));
+    const users = await getManager().find(User);
+    response.send(users);
 });
+
+router.post('/', async (request, response) => {
+    console.log('user add',  User.createUserFromJson(request.body));
+    const user: User = User.createUserFromJson(request.body);
+    console.log('request.body', request.body);
+    await getManager().save(user);
+})

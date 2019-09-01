@@ -6,15 +6,15 @@ import * as express from 'express';
 import routes = require('./routes')
 
 
+createConnection().then(async connection => {
+    const server = module.exports = require('express')();
 
-const server = module.exports = require('express')();
+    server.use(routes);
 
-server.use(routes);
-
-server.listen(3000, function () {
-    console.log('Booking app listening on port 3000!')
-});
-
+    server.listen(3000, function () {
+        console.log('Booking app listening on port 3000!')
+    });
+})
 // createConnection().then(async connection => {
 
 //     console.log("Inserting a new user into the database...");
@@ -31,4 +31,4 @@ server.listen(3000, function () {
 
 //     console.log("Here you can setup and run express/koa/any other framework.");
 
-// }).catch(error => console.log(error));
+// }).catch(error => console.log(error))
