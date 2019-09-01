@@ -9,22 +9,22 @@ export class User {
     id: number;
 
     @Column()
-    firstName: string;
-
-    @Column()
-    lastName: string;
+    name: string;
 
     @Column()
     age: number;
+
+    @Column()
+    email: string
 
     @OneToMany(type => Booking, booking => booking.id)
     bookings: Booking[];
     
     static createUserFromJson(userJson) {
         const user = new User();
-        user.firstName = userJson.firstName;
-        user.lastName = userJson.lastName;
+        user.name = userJson.name;
         user.age = userJson.age;
+        user.email = userJson.email;
         return user;
     }
 

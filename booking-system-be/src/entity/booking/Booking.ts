@@ -17,7 +17,22 @@ export class Booking {
     endDate: Date;
 
     @ManyToOne(type => User, user => user.bookings)
-    user: User;
+    user: number;
+
+
+    static createBookingFromJson(bookingJson) {
+
+        if(!bookingJson)
+            return;
+
+        const booking = new Booking();
+        booking.title = bookingJson.title;
+        booking.startDate = new Date(bookingJson.startDate);
+        booking.endDate = new Date(bookingJson.endDate);
+        booking.user = bookingJson.user;
+
+        return booking;
+    }
 
 }
 
