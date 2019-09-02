@@ -38,5 +38,6 @@ export class LoginComponent implements OnInit {
             });
         this._router.navigate(['/booking']);
         this._storageService.set('userName', this.userName);
+        this._storageService.set('userEmail', this.userEmail);
     }
 }

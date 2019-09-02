@@ -28,7 +28,9 @@ router.get('/', async (request, response) => {
 
 
 router.post('/', async (request, response) => {
-    console.log('request.body', request.body);
+    // console.log('request.body', request.body);
     const booking: Booking = Booking.createBookingFromJson(request.body);
     await getManager().save(booking);
+    response.status(201);
+    response.json();
 })

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LocalStorageService } from 'angular-web-storage';
 import { LocationService } from '../../Services/location.service';
 import { BookingsService } from './bookings.service';
+import {formatDate} from '@angular/common';
 
 
 @Component({
@@ -13,7 +14,8 @@ export class BookingsComponent implements OnInit {
     public userName: String = '';
     public userCoordinates: String = '';
     public properties = [];
-    public selectedDates = {};
+    public selectedDates: any;
+    public user: any;
 
     constructor(
         private _storageService: LocalStorageService,
@@ -24,6 +26,7 @@ export class BookingsComponent implements OnInit {
     ngOnInit() {
         this.userName = this._storageService.get('userName');
         this.getLocation();
+        this.getUserByEmail();
     }
 
     public async getLocation() {
@@ -37,6 +40,14 @@ export class BookingsComponent implements OnInit {
         this.selectedDates = event;
     }
 
+    public getUserByEmail() {
+        this._bookingsService.getUser('http://localhost:3000/users/user/:email', {})
+        .subscribe((res: any) => {
+            console.log('userrrrr', res);
+            this.user = res;
+        });
+    }
+
     public search() {
         this._bookingsService.getProperties(this.userCoordinates,
          {Accept: 'application/json' }).subscribe((res: any) => {
@@ -47,7 +58,18 @@ export class BookingsComponent implements OnInit {
 
     public bookProperty(i) {
         console.log('title', this.properties[i].title);
-        console.log('selected dates', this.selectedDates);
+        if (!this.selectedDates) {
+            return;
+        }
+        const booking = {
+            title: this.properties[i].title,
+            startDate: formatDate(this.selectedDates.startDate, 'yyyy/MM/dd', 'en'),
+            endDate: formatDate(this.selectedDates.endDate, 'yyyy/MM/dd', 'en'),
+            user: this.user.id
+        };
+        
+        console.log('bopooking object', booking);
+        console.log('selected dates', formatDate(this.selectedDates.startDate, 'yyyy/MM/dd', 'en'));
     }
 
     public onLoad(args: any) {

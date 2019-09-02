@@ -22,7 +22,7 @@ export class RequestService {
 
     public get(url: string, headers: any = {}, responseType: any = 'json') {
         return this._http
-            .get(this._rootUrl + url + this._apiToken, { headers, responseType })
+            .get(url , { headers, responseType })
             .pipe(res => {
                 return res;
             })
