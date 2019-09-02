@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
         this._storageService.remove('userName');
+        this._storageService.remove('userEmail');
     }
 
     public login() {

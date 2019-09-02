@@ -29,4 +29,8 @@ export class BookingsService {
         const userUrl = url.replace(':email', userEmail);
         return this._requestService.get(userUrl, header);
     }
+
+    public addNewBooking(url, booking, header): Observable<any> {
+        return this._requestService.post(url, booking, header);
+    }
 }

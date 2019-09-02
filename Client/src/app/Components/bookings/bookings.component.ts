@@ -68,6 +68,13 @@ export class BookingsComponent implements OnInit {
             user: this.user.id
         };
         
+        this._bookingsService
+            .addNewBooking('http://localhost:3000/bookings', booking, {
+                'Content-Type': 'application/json'
+            })
+            .subscribe((res: any) => {
+               console.log('resss', res);
+            });
         console.log('bopooking object', booking);
         console.log('selected dates', formatDate(this.selectedDates.startDate, 'yyyy/MM/dd', 'en'));
     }
