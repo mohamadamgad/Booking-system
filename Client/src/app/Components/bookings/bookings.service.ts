@@ -24,8 +24,7 @@ export class BookingsService {
         return this._requestService.get(fullUrl, header);
     }
 
-    public getUser(url, header): Observable<any> {
-        const userEmail = this._storageService.get('userEmail');
+    public getUser(url, userEmail,  header): Observable<any> {
         const userUrl = url.replace(':email', userEmail);
         return this._requestService.get(userUrl, header);
     }

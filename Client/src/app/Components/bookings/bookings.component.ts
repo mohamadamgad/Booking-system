@@ -16,6 +16,7 @@ export class BookingsComponent implements OnInit {
     public properties = [];
     public selectedDates: any;
     public user: any;
+    public showDatesError: Boolean = false;
 
     constructor(
         private _storageService: LocalStorageService,
@@ -41,7 +42,8 @@ export class BookingsComponent implements OnInit {
     }
 
     public getUserByEmail() {
-        this._bookingsService.getUser('http://localhost:3000/users/user/:email', {})
+        const userEmail = this._storageService.get('userEmail');
+        this._bookingsService.getUser('http://localhost:3000/users/user/:email', userEmail, {})
         .subscribe((res: any) => {
             console.log('userrrrr', res);
             this.user = res;
@@ -59,6 +61,7 @@ export class BookingsComponent implements OnInit {
     public bookProperty(i) {
         console.log('title', this.properties[i].title);
         if (!this.selectedDates) {
+            this.showDatesError = true;
             return;
         }
         const booking = {
@@ -67,7 +70,7 @@ export class BookingsComponent implements OnInit {
             endDate: formatDate(this.selectedDates.endDate, 'yyyy/MM/dd', 'en'),
             user: this.user.id
         };
-        
+        console.log('BOOKING', booking);
         this._bookingsService
             .addNewBooking('http://localhost:3000/bookings', booking, {
                 'Content-Type': 'application/json'

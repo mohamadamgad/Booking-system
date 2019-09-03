@@ -3,7 +3,9 @@ import { Router } from '@angular/router';
 import { LocalStorageService } from 'angular-web-storage';
 import { LoginService } from './login.service';
 import { Subscription } from 'rxjs';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
+import { BookingsService } from '../bookings/bookings.service';
+
 
 @Component({
     selector: 'app-login',
@@ -15,11 +17,15 @@ export class LoginComponent implements OnInit {
     public userEmail: String;
     private _loginSubscription: Subscription;
     public goToBooking: Boolean = false;
+    public user: any;
+    public loginSubj = new Subject();
+
 
     constructor(
         private _router: Router,
         private _storageService: LocalStorageService,
-        private _loginService: LoginService
+        private _loginService: LoginService,
+        private _bookingService: BookingsService
     ) {}
 
     ngOnInit() {
@@ -27,28 +33,43 @@ export class LoginComponent implements OnInit {
         this._storageService.remove('userEmail');
     }
 
-    public login() {
+    public async login() {
         this.goToBooking = false;
         const user = {
             name: this.userName,
             email: this.userEmail
         };
-        const loginSubj = new Subject();
-        this._loginSubscription = this._loginService
-            .addNewUser('http://localhost:3000/users', user, {
-                'Content-Type': 'application/json'
-            })
-            .subscribe((res: any) => {
-                loginSubj.next(res);
-            });
+        const checkSub = new Subject();
+        this.user = await this._bookingService.getUser('http://localhost:3000/users/user/:email', this.userEmail, {})
+        .toPromise();
+        // .subscribe((res: any) => {
+        //     console.log('userrrrrloginnnnn', res);
+        //     checkSub.next(res);
+        //     this.user = res;
+        // });
+        console.log('this.user PROMISE', this.user);
+        if (!this.user) {
+            console.log('this.user 222', this.user);
+            console.log('NEW USER');
+            await this._loginService
+                .addNewUser('http://localhost:3000/users', user, {'Content-Type': 'application/json'}).toPromise();
+                this._router.navigate(['/booking']);
+                // .subscribe((res: any) => {
+                //     this.loginSubj.next(res);
+                // });
+
+        } else {
+            this._router.navigate(['/booking']);
+        }
 
         this._storageService.set('userName', this.userName);
         this._storageService.set('userEmail', this.userEmail);
 
-        loginSubj.subscribe( res => {
-            this._router.navigate(['/booking']);
-            }
-        );
+
+        // this.loginSubj.subscribe( res => {
+        //     this._router.navigate(['/booking']);
+        //     }
+        // );
 
 
     }
