@@ -3,7 +3,6 @@
     justify-content: center;
     align-items: center;
     height: 100%;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
 }
 .login-form {
     display: flex;
@@ -11,29 +10,29 @@
     width: 40%;
 }
 
-.login-form__title{
+.login-form__title {
     font-size: 2em;
     margin: 20px 0;
     font-weight: 300;
 }
 
-.login-form__input{
+.login-form__input {
     min-height: 40px;
     padding: 0;
     border: 0px;
     flex: 2 0;
-    border: 1px solid #D6D8DC;
+    border: 1px solid #d6d8dc;
     border-radius: 4px;
     font-size: 16px;
-    color: #323C52;
-    text-indent:12px;
+    color: #323c52;
+    text-indent: 12px;
     margin-bottom: 10px;
 }
 
 .login-form__input-name ::placeholder {
     font-size: 16px;
-    color: #ADB1BA;
-    text-indent:12px;
+    color: #adb1ba;
+    text-indent: 12px;
 }
 
 .login-form__button {
@@ -41,8 +40,8 @@
     border: 0;
     height: 40px;
     border-radius: 4px;
-    background: #5AA8AC;
-    color: #FFFFFF;
+    background: #5aa8ac;
+    color: #ffffff;
     font-size: 24px;
     margin-top: 10px;
 }

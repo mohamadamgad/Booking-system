@@ -1,4 +1,4 @@
-<h2>Welcome {{ userName }}</h2>
+<h1 class="header">Welcome {{ userName }}</h1>
 
 <form class="search">
     <div class="search__wrapper">
@@ -11,23 +11,39 @@
             [(ngModel)]="userCoordinates"
             required
         />
-        <ejs-daterangepicker strictMode='true' placeholder='Select a range' 
-        (renderDayCell)="onLoad($event)"
-        (change) = "datesSelected($event)"></ejs-daterangepicker>
-        <button type="submit" class="search__submit" (click) = "search()">Search</button>
+        <ejs-daterangepicker
+            strictMode="true"
+            placeholder="Select a range"
+            (renderDayCell)="onLoad($event)"
+            (change)="datesSelected($event)"
+        ></ejs-daterangepicker>
+        <button type="submit" class="search__submit" (click)="search()">
+            Search
+        </button>
     </div>
 </form>
 
 <div class="properties">
-    <h3 *ngIf="properties.length > 0">We have found {{properties.length}} properties near you</h3>
-    <ul class="properties__list" *ngFor="let property of properties; let i = index">
-        <li class="properties__list-item properties__list-item-icon"><img src="{{property.icon}}" alt=""></li>
+    <h3 *ngIf="properties.length > 0">
+        We have found {{ properties.length }} properties near you
+    </h3>
+    <ul
+        class="properties__list"
+        *ngFor="let property of properties; let i = index"
+    >
+        <li class="properties__list-item properties__list-item-icon">
+            <img src="{{ property.icon }}" alt="" />
+        </li>
         <div class="properties__list-details">
-            <li class="properties__list-item">{{property.title}}</li>
-            <li class="properties__list-item">{{property.category.id}}</li>
-            <li class="properties__list-item">{{property.distance}} m</li>
+            <li class="properties__list-item">{{ property.title }}</li>
+            <li class="properties__list-item">{{ property.category.id }}</li>
+            <li class="properties__list-item">{{ property.distance }} m</li>
             <li class="properties__list-item properties__list-item-action">
-                <button type="submit" class="properties__list-item-action-button" (click) = "bookProperty(i)">
+                <button
+                    type="submit"
+                    class="properties__list-item-action-button"
+                    (click)="bookProperty(i)"
+                >
                     Book Now
                 </button>
             </li>

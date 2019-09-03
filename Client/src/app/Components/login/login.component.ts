@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LocalStorageService } from 'angular-web-storage';
 import { LoginService } from './login.service';
-import { Subscription } from 'rxjs';
 import { Subject } from 'rxjs';
 import { BookingsService } from '../bookings/bookings.service';
 
@@ -15,7 +14,6 @@ import { BookingsService } from '../bookings/bookings.service';
 export class LoginComponent implements OnInit {
     public userName: String;
     public userEmail: String;
-    private _loginSubscription: Subscription;
     public goToBooking: Boolean = false;
     public user: any;
     public loginSubj = new Subject();

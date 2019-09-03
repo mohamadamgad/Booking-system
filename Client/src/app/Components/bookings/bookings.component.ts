@@ -36,30 +36,27 @@ export class BookingsComponent implements OnInit {
     }
 
     public datesSelected(event) {
-        console.log('selected', event);
-        console.log('selected type', typeof event);
         this.selectedDates = event;
     }
 
-    public getUserByEmail() {
+    public getPropertyBooking() {
+
+    }
+
+    public async getUserByEmail() {
         const userEmail = this._storageService.get('userEmail');
-        this._bookingsService.getUser('http://localhost:3000/users/user/:email', userEmail, {})
-        .subscribe((res: any) => {
-            console.log('userrrrr', res);
-            this.user = res;
-        });
+        this.user = await this._bookingsService.getUser('http://localhost:3000/users/user/:email', userEmail, {})
+        .toPromise();
     }
 
-    public search() {
-        this._bookingsService.getProperties(this.userCoordinates,
-         {Accept: 'application/json' }).subscribe((res: any) => {
-            this.properties = res.results.items;
-            console.log('props', this.properties);
-        });
+    public async search() {
+
+        const res = await this._bookingsService.getProperties(this.userCoordinates, {Accept: 'application/json' }).toPromise();
+        this.properties = res.results.items;
+        console.log('this.properties', this.properties);
     }
 
-    public bookProperty(i) {
-        console.log('title', this.properties[i].title);
+    public async bookProperty(i) {
         if (!this.selectedDates) {
             this.showDatesError = true;
             return;
@@ -70,16 +67,11 @@ export class BookingsComponent implements OnInit {
             endDate: formatDate(this.selectedDates.endDate, 'yyyy/MM/dd', 'en'),
             user: this.user.id
         };
-        console.log('BOOKING', booking);
-        this._bookingsService
+        await this._bookingsService
             .addNewBooking('http://localhost:3000/bookings', booking, {
                 'Content-Type': 'application/json'
-            })
-            .subscribe((res: any) => {
-               console.log('resss', res);
-            });
-        console.log('bopooking object', booking);
-        console.log('selected dates', formatDate(this.selectedDates.startDate, 'yyyy/MM/dd', 'en'));
+            }).toPromise();
+
     }
 
     public onLoad(args: any) {
