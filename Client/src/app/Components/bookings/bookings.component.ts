@@ -18,6 +18,7 @@ export class BookingsComponent implements OnInit {
     public user: any;
     public showDatesError: Boolean = false;
     public rangeDates: Date[];
+    public invalidDates: Date[] = [];
 
     constructor(
         private _storageService: LocalStorageService,
@@ -36,8 +37,12 @@ export class BookingsComponent implements OnInit {
         this.userCoordinates = response.lat + ',' + response.lng;
     }
 
-    public datesSelected(event) {
-        this.selectedDates = event;
+    public datesSelected() {
+        console.log('dattetetetet', this.rangeDates);
+    }
+    
+    public async checkDates(i) {
+        const datesForProperty = await this._bookingsService.getBookingForProperty(this.properties[i].title, {}).toPromise();
     }
 
     public getPropertyBooking() {
@@ -57,18 +62,18 @@ export class BookingsComponent implements OnInit {
     }
 
     public async bookProperty(i) {
-        if (!this.selectedDates) {
-            this.showDatesError = true;
-            return;
-        }
-        const book = await this._bookingsService.getBookingForProperty(this.properties[i].title, {}).toPromise();
-        console.log('booking for property', book);
+        // if (!this.selectedDates) {
+        //     this.showDatesError = true;
+        //     return;
+        // }
 
+        console.log('start', this.rangeDates[0]);
+        console.log('end', this.rangeDates[1]);
 
         const booking = {
             title: this.properties[i].title,
-            startDate: formatDate(this.selectedDates.startDate, 'yyyy/MM/dd', 'en'),
-            endDate: formatDate(this.selectedDates.endDate, 'yyyy/MM/dd', 'en'),
+            startDate: formatDate(this.rangeDates[0], 'yyyy/MM/dd', 'en'),
+            endDate: formatDate(this.rangeDates[1], 'yyyy/MM/dd', 'en'),
             user: this.user.id
         };
         await this._bookingsService
