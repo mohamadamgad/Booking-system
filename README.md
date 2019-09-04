@@ -28,4 +28,4 @@ go to http://localhost:4200/
 
 ## TODO's
 1. Docarize the app
-2. Use a more scalable database
+2. Use a more production like database (Mysql)
