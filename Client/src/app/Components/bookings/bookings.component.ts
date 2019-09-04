@@ -38,10 +38,8 @@ export class BookingsComponent implements OnInit {
         const response = await this._locationService.getPosition();
         this.userCoordinates = response.lat + ',' + response.lng;
     }
-    
     public async checkDates(i) {
         const datesForProperty = await this._bookingsService.getBookingForProperty(this.properties[i].title, {}).toPromise();
-    
     }
 
     public getPropertyBooking() {

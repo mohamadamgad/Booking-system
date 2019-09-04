@@ -1,8 +1,6 @@
 import "reflect-metadata";
 import {createConnection} from "typeorm";
-import {User} from "./entity/user/User";
 
-import * as express from 'express';
 import routes = require('./routes')
 
 

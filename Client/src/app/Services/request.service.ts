@@ -1,4 +1,4 @@
-import { catchError, finalize, map, timeout } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import {
     HttpClient
@@ -44,8 +44,6 @@ export class RequestService {
         headers: any = {},
         responseType: any = 'json'
     ): Observable<any> {
-        console.log('header', headers);
-        console.log('data', data);
         return this._http
             .post(url, data, { headers, responseType })
             .pipe(
