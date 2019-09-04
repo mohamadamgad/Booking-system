@@ -14,7 +14,7 @@ Clone the repo
 
 cd Booking-system
 
-cd Server
+cd booking-system-be
 run yarn 
 then yarn start
 
