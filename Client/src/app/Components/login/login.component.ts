@@ -41,10 +41,7 @@ export class LoginComponent implements OnInit {
         this.user = await this._bookingService.getUser(this.userEmail, {})
         .toPromise();
 
-        console.log('this.user PROMISE', this.user);
         if (!this.user) {
-            console.log('this.user 222', this.user);
-            console.log('NEW USER');
             await this._loginService
                 .addNewUser(user, {'Content-Type': 'application/json'}).toPromise();
                 this._router.navigate(['/booking']);

@@ -38,13 +38,8 @@ export class BookingsComponent implements OnInit {
         const response = await this._locationService.getPosition();
         this.userCoordinates = response.lat + ',' + response.lng;
     }
-
-    public datesSelected() {
-        console.log('dattetetetet', this.rangeDates);
-    }
     
     public async checkDates(i) {
-        console.log('iiiii', i);
         const datesForProperty = await this._bookingsService.getBookingForProperty(this.properties[i].title, {}).toPromise();
     
     }
@@ -62,17 +57,9 @@ export class BookingsComponent implements OnInit {
     public async search() {
         const res = await this._bookingsService.getProperties(this.userCoordinates, {Accept: 'application/json' }).toPromise();
         this.properties = res.results.items;
-        console.log('this.properties', this.properties);
     }
 
     public async bookProperty(i) {
-        // if (!this.selectedDates) {
-        //     this.showDatesError = true;
-        //     return;
-        // }
-
-        console.log('start', this.rangeDates[0]);
-        console.log('end', this.rangeDates[1]);
 
         const booking = {
             title: this.properties[i].title,
@@ -92,12 +79,5 @@ export class BookingsComponent implements OnInit {
                 summary: 'Property Booked Successfully!'
             });
 
-    }
-
-    public onLoad(args: any) {
-        console.log('args', args.date);
-        if (args.date.getDay() === 0 || args.date.getDay() === 6) {
-            args.isDisabled = true;
-        }
     }
 }
