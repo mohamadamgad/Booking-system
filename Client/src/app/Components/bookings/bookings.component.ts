@@ -3,6 +3,7 @@ import { LocalStorageService } from 'angular-web-storage';
 import { LocationService } from '../../Services/location.service';
 import { BookingsService } from './bookings.service';
 import {formatDate} from '@angular/common';
+import {MessageService} from 'primeng/api';
 
 
 @Component({
@@ -23,7 +24,8 @@ export class BookingsComponent implements OnInit {
     constructor(
         private _storageService: LocalStorageService,
         private _locationService: LocationService,
-        private _bookingsService: BookingsService
+        private _bookingsService: BookingsService,
+        private _messageService: MessageService
     ) {}
 
     ngOnInit() {
@@ -42,7 +44,9 @@ export class BookingsComponent implements OnInit {
     }
     
     public async checkDates(i) {
+        console.log('iiiii', i);
         const datesForProperty = await this._bookingsService.getBookingForProperty(this.properties[i].title, {}).toPromise();
+    
     }
 
     public getPropertyBooking() {
@@ -80,6 +84,13 @@ export class BookingsComponent implements OnInit {
             .addNewBooking(booking, {
                 'Content-Type': 'application/json'
             }).toPromise();
+
+            this._messageService.add({
+                key: 'bookingSuccess',
+                sticky: true,
+                severity: 'success',
+                summary: 'Property Booked Successfully!'
+            });
 
     }
 

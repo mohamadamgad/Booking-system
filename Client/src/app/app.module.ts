@@ -15,6 +15,8 @@ import { AngularWebStorageModule } from 'angular-web-storage';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { DateRangePickerModule } from '@syncfusion/ej2-angular-calendars';
 import {CalendarModule} from 'primeng/calendar';
+import {ToastModule} from 'primeng/toast';
+import {MessageService} from 'primeng/api';
 
 
 
@@ -34,9 +36,10 @@ import {CalendarModule} from 'primeng/calendar';
     AngularWebStorageModule,
     DateRangePickerModule,
     CalendarModule,
+    ToastModule,
     NgxDaterangepickerMd.forRoot()
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -15,17 +15,10 @@
                 [(ngModel)]="rangeDates"
                 name="dateselector"
                 (onSelect)="datesSelected()"
-                (onFocus)= "checkDates(i)"
                 placeholder="Select dates"
                 selectionMode="range"
                 [readonlyInput]="true"
             ></p-calendar>
-        <!-- <ejs-daterangepicker
-            strictMode="true"
-            placeholder="Select a range"
-            (renderDayCell)="onLoad($event)"
-            (change)="datesSelected($event)"
-        ></ejs-daterangepicker> -->
         <button type="submit" class="search__submit" (click)="search()">
             Search
         </button>
@@ -59,3 +52,4 @@
         </div>
     </ul>
 </div>
+<p-toast key="bookingSuccess"  position="top-right"></p-toast>

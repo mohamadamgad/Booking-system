@@ -40,7 +40,6 @@ export class BookingsService {
     public getBookingForProperty(propertyTitle,  header): Observable<any> {
         let url = this._backEndUrl + '/bookings/booking/getTitle/:title';
         url = url.replace(':title', propertyTitle);
-        console.log('bookingurl', url);
 
         return this._requestService.get(url, header);
     }
