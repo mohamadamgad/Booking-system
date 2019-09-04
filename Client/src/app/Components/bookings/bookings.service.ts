@@ -10,13 +10,15 @@ import { LocalStorageService } from 'angular-web-storage';
 export class BookingsService {
     private readonly _rootUrl: string;
     private readonly _apiToken: string;
+    private readonly _backEndUrl: string;
 
     constructor(
         private _requestService: RequestService,
         private _storageService: LocalStorageService
     ) {
-        this._rootUrl = environment.backendUrl;
+        this._rootUrl = environment.placesApiUrl;
         this._apiToken = environment.apiToken;
+        this._backEndUrl = environment.backendUrl;
     }
 
     public getProperties(url, header): Observable<any> {

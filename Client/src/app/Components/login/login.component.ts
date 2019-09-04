@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
             console.log('this.user 222', this.user);
             console.log('NEW USER');
             await this._loginService
-                .addNewUser('http://localhost:3000/users', user, {'Content-Type': 'application/json'}).toPromise();
+                .addNewUser(user, {'Content-Type': 'application/json'}).toPromise();
                 this._router.navigate(['/booking']);
                 // .subscribe((res: any) => {
                 //     this.loginSubj.next(res);
