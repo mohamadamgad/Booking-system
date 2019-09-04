@@ -17,6 +17,7 @@ export class BookingsComponent implements OnInit {
     public selectedDates: any;
     public user: any;
     public showDatesError: Boolean = false;
+    public rangeDates: Date[];
 
     constructor(
         private _storageService: LocalStorageService,
@@ -45,12 +46,11 @@ export class BookingsComponent implements OnInit {
 
     public async getUserByEmail() {
         const userEmail = this._storageService.get('userEmail');
-        this.user = await this._bookingsService.getUser('http://localhost:3000/users/user/:email', userEmail, {})
+        this.user = await this._bookingsService.getUser(userEmail, {})
         .toPromise();
     }
 
     public async search() {
-
         const res = await this._bookingsService.getProperties(this.userCoordinates, {Accept: 'application/json' }).toPromise();
         this.properties = res.results.items;
         console.log('this.properties', this.properties);
@@ -61,6 +61,10 @@ export class BookingsComponent implements OnInit {
             this.showDatesError = true;
             return;
         }
+        const book = await this._bookingsService.getBookingForProperty(this.properties[i].title, {}).toPromise();
+        console.log('booking for property', book);
+
+
         const booking = {
             title: this.properties[i].title,
             startDate: formatDate(this.selectedDates.startDate, 'yyyy/MM/dd', 'en'),
@@ -68,13 +72,14 @@ export class BookingsComponent implements OnInit {
             user: this.user.id
         };
         await this._bookingsService
-            .addNewBooking('http://localhost:3000/bookings', booking, {
+            .addNewBooking(booking, {
                 'Content-Type': 'application/json'
             }).toPromise();
 
     }
 
     public onLoad(args: any) {
+        console.log('args', args.date);
         if (args.date.getDay() === 0 || args.date.getDay() === 6) {
             args.isDisabled = true;
         }

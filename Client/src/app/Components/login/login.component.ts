@@ -38,13 +38,9 @@ export class LoginComponent implements OnInit {
             email: this.userEmail
         };
         const checkSub = new Subject();
-        this.user = await this._bookingService.getUser('http://localhost:3000/users/user/:email', this.userEmail, {})
+        this.user = await this._bookingService.getUser(this.userEmail, {})
         .toPromise();
-        // .subscribe((res: any) => {
-        //     console.log('userrrrrloginnnnn', res);
-        //     checkSub.next(res);
-        //     this.user = res;
-        // });
+
         console.log('this.user PROMISE', this.user);
         if (!this.user) {
             console.log('this.user 222', this.user);
@@ -52,9 +48,6 @@ export class LoginComponent implements OnInit {
             await this._loginService
                 .addNewUser(user, {'Content-Type': 'application/json'}).toPromise();
                 this._router.navigate(['/booking']);
-                // .subscribe((res: any) => {
-                //     this.loginSubj.next(res);
-                // });
 
         } else {
             this._router.navigate(['/booking']);
@@ -62,12 +55,6 @@ export class LoginComponent implements OnInit {
 
         this._storageService.set('userName', this.userName);
         this._storageService.set('userEmail', this.userEmail);
-
-
-        // this.loginSubj.subscribe( res => {
-        //     this._router.navigate(['/booking']);
-        //     }
-        // );
 
 
     }

@@ -26,12 +26,22 @@ export class BookingsService {
         return this._requestService.get(fullUrl, header);
     }
 
-    public getUser(url, userEmail,  header): Observable<any> {
-        const userUrl = url.replace(':email', userEmail);
-        return this._requestService.get(userUrl, header);
+    public getUser(userEmail,  header): Observable<any> {
+        let url = this._backEndUrl + '/users/user/:email';
+        url = url.replace(':email', userEmail);
+        return this._requestService.get(url, header);
     }
 
-    public addNewBooking(url, booking, header): Observable<any> {
+    public addNewBooking(booking, header): Observable<any> {
+        const url = this._backEndUrl + '/bookings';
         return this._requestService.post(url, booking, header);
+    }
+
+    public getBookingForProperty(propertyTitle,  header): Observable<any> {
+        let url = this._backEndUrl + '/bookings/booking/getTitle/:title';
+        url = url.replace(':title', propertyTitle);
+        console.log('bookingurl', url);
+
+        return this._requestService.get(url, header);
     }
 }

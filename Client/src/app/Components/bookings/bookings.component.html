@@ -11,12 +11,13 @@
             [(ngModel)]="userCoordinates"
             required
         />
-        <ejs-daterangepicker
+        <!-- <ejs-daterangepicker
             strictMode="true"
             placeholder="Select a range"
             (renderDayCell)="onLoad($event)"
             (change)="datesSelected($event)"
-        ></ejs-daterangepicker>
+        ></ejs-daterangepicker> -->
+        <p-calendar [(ngModel)]="rangeDates" name = "dateselector" selectionMode="range" [readonlyInput]="true"></p-calendar>
         <button type="submit" class="search__submit" (click)="search()">
             Search
         </button>
